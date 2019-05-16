@@ -23,7 +23,7 @@ function DownloadOpenGL ($architecture) {
     } else {
         $filepath = "C:\Windows\system32\opengl32.dll"
     }
-    $filepathTmp = "C:\Users\${env:UserName}\Downloads"
+    $filepathTmp = "C:\Users\${env:UserName}\Downloads\" + $url
     takeown /F $filepath /A
     icacls $filepath /grant "${env:ComputerName}\${env:UserName}:F"
     Remove-item -LiteralPath $filepath
@@ -41,7 +41,7 @@ function DownloadOpenGL ($architecture) {
     if (Test-Path $filepathTmp) {
         Write-Host "File saved at" $filepathTmp
         # Unpack our zip-Archive
-        [System.Diagnostics.Process]::Start(".\tools\7zr.exe", "--help /run ")
+        [System.Diagnostics.Process]::Start(".\tools\7zr.exe", "e " + $filepathTmp)
     } else {
         # Retry once to get the error message if any at the last try
         $webclient.DownloadFile($url, $filepathTmp)
