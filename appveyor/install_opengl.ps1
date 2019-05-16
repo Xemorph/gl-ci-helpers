@@ -20,9 +20,9 @@ function DownloadOpenGL ($architecture) {
     # For later use, need to move file to the system directory to make it
     # globally accessible
     if ($architecture -eq "32") {
-        $filepath = "C:\Windows\SysWOW64\opengl32.dll"
+        $filepath = "C:\Windows\SysWOW64\glfw3.dll"
     } else {
-        $filepath = "C:\Windows\system32\opengl32.dll"
+        $filepath = "C:\Windows\system32\glfw3.dll"
     }
     $filepathTmp = "C:\Users\${env:UserName}\Downloads\${fileName}"
     takeown /F $filepath /A
@@ -43,8 +43,11 @@ function DownloadOpenGL ($architecture) {
         Write-Host "File saved at" $filepathTmp
         # Unpack our zip-Archive
         Invoke-Expression "& `"7z`" e -y ${filepathTmp}"
-        # Invoke-Expression "& `".\tools\7zr.exe`" e -y ${filepathTmp}"
-        # [System.Diagnostics.Process]::Start(".\tools\7zr.exe", "e " + ($filepathTmp + "\" + $fileName))
+        # Move files into the right destination (libraries & headers)
+        Move-Item -Path "C:\Users\${env:UserName}\Downloads\glfw-3.3.bin.WIN${architecture}\lib-vc2017\glfw3.dll" -Destination "${filepath}"
+        # Remove temporary created files
+        Remove-item -LiteralPath $filepathTmp
+        Remove-item -LiteralPath  "C:\Users\${env:UserName}\Downloads\glfw-3.3.bin.WIN${architecture}"
     } else {
         # Retry once to get the error message if any at the last try
         $webclient.DownloadFile($url, $filepathTmp)
