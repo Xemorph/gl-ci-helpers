@@ -16,6 +16,7 @@ function DownloadOpenGL ($architecture) {
     $webclient = New-Object System.Net.WebClient
     # Download and retry up to 3 times in case of network transient errors.
     $url = $GLFW_URL + "3.3/glfw-3.3.bin.WIN" + $architecture + ".zip"
+    $fileName = "glfw-3.3.bin.WIN" + $architecture + ".zip"
     # For later use, need to move file to the system directory to make it
     # globally accessible
     if ($architecture -eq "32") {
@@ -23,7 +24,7 @@ function DownloadOpenGL ($architecture) {
     } else {
         $filepath = "C:\Windows\system32\opengl32.dll"
     }
-    $filepathTmp = "C:\Users\${env:UserName}\Downloads\" + $url
+    $filepathTmp = "C:\Users\${env:UserName}\Downloads"
     takeown /F $filepath /A
     icacls $filepath /grant "${env:ComputerName}\${env:UserName}:F"
     Remove-item -LiteralPath $filepath
@@ -41,7 +42,7 @@ function DownloadOpenGL ($architecture) {
     if (Test-Path $filepathTmp) {
         Write-Host "File saved at" $filepathTmp
         # Unpack our zip-Archive
-        [System.Diagnostics.Process]::Start(".\tools\7zr.exe", "e " + $filepathTmp)
+        [System.Diagnostics.Process]::Start(".\tools\7zr.exe", "e " + ($filepathTmp + "\" + $fileName))
     } else {
         # Retry once to get the error message if any at the last try
         $webclient.DownloadFile($url, $filepathTmp)
