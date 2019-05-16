@@ -1,5 +1,6 @@
 // main.cpp : the application source code.
-#include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
 #include <GLFW/glfw3.h>
 
 using namespace std;
