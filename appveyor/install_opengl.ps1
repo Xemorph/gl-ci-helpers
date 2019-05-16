@@ -42,7 +42,7 @@ function DownloadOpenGL ($architecture) {
     if (Test-Path $filepathTmp) {
         Write-Host "File saved at" $filepathTmp
         # Unpack our zip-Archive
-        Invoke-Expression "& `"7z`" e -y ${filepathTmp}"
+        Invoke-Expression "& `"7z`" e -y -o C:\Users\${env:UserName}\Downloads ${filepathTmp}"
         # Move files into the right destination (libraries & headers)
         Move-Item -Path "C:\Users\${env:UserName}\Downloads\glfw-3.3.bin.WIN${architecture}\lib-vc2017\glfw3.dll" -Destination "${filepath}"
         # Remove temporary created files
