@@ -1,6 +1,6 @@
-# Sample script to install Python and pip under Windows
-# Authors: Olivier Grisel, Jonathan Helmus and Kyle Kastner
-# License: CC0 1.0 Universal: http://creativecommons.org/publicdomain/zero/1.0/
+# Script to install glfwX (X stands for the version) under Windows
+# Authors: Voltana <oss@derikmediagroup.xyz>
+# License: MIT: http://creativecommons.org/publicdomain/zero/1.0/
 
 # Adapted from VisPy
 
@@ -42,7 +42,7 @@ function DownloadOpenGL ($architecture) {
     if (Test-Path $filepathTmp) {
         Write-Host "File saved at" $filepathTmp
         # Unpack our zip-Archive
-        Invoke-Expression "& `"7z`" e -y -oC:\Users\${env:UserName}\Downloads ${filepathTmp}"
+        Invoke-Expression "& `"7z`" e -y -oC:\Users\${env:UserName}\Downloads\glfw-3.3.bin.WIN${architecture} ${filepathTmp}"
         # Move files into the right destination (libraries & headers)
         Move-Item -Path "C:\Users\${env:UserName}\Downloads\glfw-3.3.bin.WIN${architecture}\lib-vc2017\glfw3.dll" -Destination "${filepath}"
         # Remove temporary created files
