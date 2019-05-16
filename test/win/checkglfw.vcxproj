@@ -23,6 +23,11 @@
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>C:\Users\appveyor\Downloads\glfw-3.3.bin.WIN64\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\appveyor\Downloads\glfw-3.3.bin.WIN64\lib-vc2017;$(LibraryPath)</LibraryPath>
+    <TargetName>scg3_example</TargetName>
+  </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ItemGroup>
     <ClCompile Include="main.cpp" />
