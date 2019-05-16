@@ -43,11 +43,13 @@ function DownloadOpenGL ($architecture) {
         Write-Host "File saved at" $filepathTmp
         # Unpack our zip-Archive
         Invoke-Expression "& `"7z`" e -y -oC:\Users\${env:UserName}\Downloads\glfw-3.3.bin.WIN${architecture} ${filepathTmp}"
+        # Debug stuff | Need to be removed at release
+        Get-ChildItem "C:\Users\${env:UserName}\Downloads"
         # Move files into the right destination (libraries & headers)
-        Move-Item -Path "C:\Users\${env:UserName}\Downloads\glfw-3.3.bin.WIN${architecture}\lib-vc2017\glfw3.dll" -Destination "${filepath}"
+        # Move-Item -Path "C:\Users\${env:UserName}\Downloads\glfw-3.3.bin.WIN${architecture}\lib-vc2017\glfw3.dll" -Destination "${filepath}"
         # Remove temporary created files
-        Remove-item -LiteralPath $filepathTmp
-        Remove-item -LiteralPath  "C:\Users\${env:UserName}\Downloads\glfw-3.3.bin.WIN${architecture}"
+        # Remove-item -LiteralPath $filepathTmp
+        # Remove-item -LiteralPath  "C:\Users\${env:UserName}\Downloads\glfw-3.3.bin.WIN${architecture}"
     } else {
         # Retry once to get the error message if any at the last try
         $webclient.DownloadFile($url, $filepathTmp)
