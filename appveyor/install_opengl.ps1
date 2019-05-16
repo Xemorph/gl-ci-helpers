@@ -42,7 +42,8 @@ function DownloadOpenGL ($architecture) {
     if (Test-Path $filepathTmp) {
         Write-Host "File saved at" $filepathTmp
         # Unpack our zip-Archive
-        [System.Diagnostics.Process]::Start(".\tools\7zr.exe", "e " + ($filepathTmp + "\" + $fileName))
+        Invoke-Expression "& `".\tools\7zr.exe`" e -y ${filepathTmp}\${fileName}"
+        # [System.Diagnostics.Process]::Start(".\tools\7zr.exe", "e " + ($filepathTmp + "\" + $fileName))
     } else {
         # Retry once to get the error message if any at the last try
         $webclient.DownloadFile($url, $filepathTmp)
