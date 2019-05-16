@@ -6,10 +6,13 @@
 
 $GLFW_URL = "https://github.com/glfw/glfw/releases/download/"
 
-# Mesa DLLs found linked from:
-#     http://qt-project.org/wiki/Cross-compiling-Mesa-for-Windows
-# to:
-#     http://sourceforge.net/projects/msys2/files/REPOS/MINGW/x86_64/mingw-w64-x86_64-mesa-10.2.4-1-any.pkg.tar.xz/download
+# GLFW pre-compiled binaries download:
+# ------------------------------------
+# 
+# Win32 -> https://github.com/glfw/glfw/releases/download/3.3/glfw-3.3.bin.WIN32.zip
+#   x64 -> https://github.com/glfw/glfw/releases/download/3.3/glfw-3.3.bin.WIN64.zip
+#
+#
 
 function DownloadOpenGL ($architecture) {
     [Net.ServicePointManager]::SecurityProtocol = 'Ssl3, Tls, Tls11, Tls12'
