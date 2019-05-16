@@ -12,11 +12,12 @@ platform:
 install:
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
   - "python --version"
-  - "pip install -q pyglet"
+  # - "pip install -q pyglet"
+  - "pip install -q cyglfw3"
   - "powershell appveyor/install_opengl.ps1"
 
 build: false  # Not a C# project, build stuff at the test step instead.
 
 test_script:
   # - "python -c \"import pyglet; r = pyglet.gl.gl_info.get_renderer(); print(r); assert 'gallium' in r.lower()\""
-  - msbuild test/win/checkglfw.vcxproj /p:configuration=release /p:platform=x64
+  - "python -c \"import cyglfw3 as glfw; if not glfw.init: exit(1)\""
