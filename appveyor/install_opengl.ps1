@@ -25,9 +25,9 @@ function DownloadOpenGL ($architecture) {
         $filepath = "C:\Windows\system32\glfw3.dll"
     }
     $filepathTmp = "C:\Users\${env:UserName}\Downloads\${fileName}"
-    takeown /F $filepath /A
-    icacls $filepath /grant "${env:ComputerName}\${env:UserName}:F"
-    Remove-item -LiteralPath $filepath
+    # takeown /F $filepath /A
+    # icacls $filepath /grant "${env:ComputerName}\${env:UserName}:F"
+    # Remove-item -LiteralPath $filepath
     Write-Host "Downloading" $url
     $retry_attempts = 2
     for($i=0; $i -lt $retry_attempts; $i++){
@@ -42,7 +42,7 @@ function DownloadOpenGL ($architecture) {
     if (Test-Path $filepathTmp) {
         Write-Host "File saved at" $filepathTmp
         # Unpack our zip-Archive
-        Invoke-Expression "& `"7z`" e -y -o C:\Users\${env:UserName}\Downloads ${filepathTmp}"
+        Invoke-Expression "& `"7z`" e -y -oC:\Users\${env:UserName}\Downloads ${filepathTmp}"
         # Move files into the right destination (libraries & headers)
         Move-Item -Path "C:\Users\${env:UserName}\Downloads\glfw-3.3.bin.WIN${architecture}\lib-vc2017\glfw3.dll" -Destination "${filepath}"
         # Remove temporary created files
