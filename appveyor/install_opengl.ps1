@@ -28,7 +28,7 @@ function DownloadOpenGL ($architecture) {
     # takeown /F $filepath /A
     # icacls $filepath /grant "${env:ComputerName}\${env:UserName}:F"
     # Clear out old paths
-    Remove-item -LiteralPath  "C:\Users\${env:UserName}\Downloads\glfw-3.3.bin.WIN${architecture}"
+    # Remove-item -LiteralPath  "C:\Users\${env:UserName}\Downloads\glfw-3.3.bin.WIN${architecture}"
     # Remove-item -LiteralPath $filepath
     Write-Host "Downloading" $url
     $retry_attempts = 2
@@ -46,12 +46,12 @@ function DownloadOpenGL ($architecture) {
         # Unpack our zip-Archive
         Invoke-Expression "& `"7z`" e -y -oC:\Users\${env:UserName}\Downloads ${filepathTmp}"
         # Debug stuff | Need to be removed at release
-        Get-ChildItem "C:\Users\${env:UserName}\Downloads\glfw-3.3.bin.WIN64"
+        Get-ChildItem "C:\Users\${env:UserName}\Downloads"
         # Move files into the right destination (libraries & headers)
         # Move-Item -Path "C:\Users\${env:UserName}\Downloads\glfw-3.3.bin.WIN${architecture}\lib-vc2017\glfw3.dll" -Destination "${filepath}"
         # Remove temporary created files
         # Remove-item -LiteralPath $filepathTmp
-        Remove-item -LiteralPath  "C:\Users\${env:UserName}\Downloads\glfw-3.3.bin.WIN${architecture}"
+        # Remove-item -LiteralPath  "C:\Users\${env:UserName}\Downloads\glfw-3.3.bin.WIN${architecture}"
     } else {
         # Retry once to get the error message if any at the last try
         $webclient.DownloadFile($url, $filepathTmp)
