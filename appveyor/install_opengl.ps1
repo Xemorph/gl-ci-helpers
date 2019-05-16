@@ -44,7 +44,7 @@ function DownloadOpenGL ($architecture) {
         # Unpack our zip-Archive
         Invoke-Expression "& `"7z`" e -y -oC:\Users\${env:UserName}\Downloads\glfw-3.3.bin.WIN${architecture} ${filepathTmp}"
         # Debug stuff | Need to be removed at release
-        Get-ChildItem "C:\Users\${env:UserName}\Downloads"
+        Get-ChildItem "C:\Users\${env:UserName}\Downloads\glfw-3.3.bin.WIN64"
         # Move files into the right destination (libraries & headers)
         # Move-Item -Path "C:\Users\${env:UserName}\Downloads\glfw-3.3.bin.WIN${architecture}\lib-vc2017\glfw3.dll" -Destination "${filepath}"
         # Remove temporary created files
