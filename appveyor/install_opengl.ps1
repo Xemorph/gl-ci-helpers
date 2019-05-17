@@ -24,8 +24,10 @@ function DownloadOpenGL ($architecture) {
     # globally accessible
     if ($architecture -eq "32") {
         $filepath = "C:\Windows\SysWOW64\glfw3.dll"
+        $filepathLib = "C:\Windows\SysWOW64\glfw3.lib"
     } else {
         $filepath = "C:\Windows\system32\glfw3.dll"
+        $filepathLib = "C:\Windows\system32\glfw3.lib"
     }
     $filepathTmp = "C:\Users\${env:UserName}\Downloads\${fileName}"
     # takeown /F $filepath /A
@@ -48,8 +50,10 @@ function DownloadOpenGL ($architecture) {
         Invoke-Expression "& `"7z`" x ${filepathTmp} -oC:\Users\${env:UserName}\Downloads"
         # Move files into the right destination (libraries & headers)
         Move-Item -Path "C:\Users\${env:UserName}\Downloads\glfw-3.3.bin.WIN${architecture}\lib-vc2017\glfw3.dll" -Destination "${filepath}"
+        Move-Item -Path "C:\Users\${env:UserName}\Downloads\glfw-3.3.bin.WIN${architecture}\lib-vc2017\glfw3.lib" -Destination "${filepathLib}"
         if (Test-Path $filepath) {
             Write-Host "File moved to" $filepath
+            Write-Host "File moved to" $filepathLib
             # Safe to clean out all unused archives & folders
             # Remove temporary created files
             Remove-item -LiteralPath $filepathTmp
